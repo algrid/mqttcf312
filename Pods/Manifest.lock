@@ -5,24 +5,20 @@ PODS:
   - CocoaLumberjack/Default (3.2.0)
   - CocoaLumberjack/Extensions (3.2.0):
     - CocoaLumberjack/Default
-  - MQTTClient/ManagerL (0.9.1):
+  - MQTTClient/ManagerL (0.9.2):
     - MQTTClient/MinL
-  - MQTTClient/MinL (0.9.1):
+  - MQTTClient/MinL (0.9.2):
     - CocoaLumberjack
 
 DEPENDENCIES:
   - CocoaLumberjack
-  - MQTTClient/ManagerL (from `~/MQTT-Client-Framework`)
-  - MQTTClient/MinL (from `~/MQTT-Client-Framework`)
-
-EXTERNAL SOURCES:
-  MQTTClient:
-    :path: ~/MQTT-Client-Framework
+  - MQTTClient/ManagerL
+  - MQTTClient/MinL
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
-  MQTTClient: 51333c9480452eb8b4f0ef6df1a515a55da94016
+  MQTTClient: 6abe18e454d462969ac7e658690ba7095992c19c
 
-PODFILE CHECKSUM: 65d1ac7a9a6f8ee41f133c2c55d454a0cdeeefca
+PODFILE CHECKSUM: ed3f4d6f116b8fbaf7700e20398b45b497799bec
 
 COCOAPODS: 1.2.1
