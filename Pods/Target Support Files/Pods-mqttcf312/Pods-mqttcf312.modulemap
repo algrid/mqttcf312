@@ -1,0 +1,6 @@
+framework module Pods_mqttcf312 {
+  umbrella header "Pods-mqttcf312-umbrella.h"
+
+  export *
+  module * { export * }
+}
