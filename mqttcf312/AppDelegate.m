@@ -20,15 +20,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-
+    
 #ifdef DEBUG
     [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:DDLogLevelVerbose];
 #else
     [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:DDLogLevelWarning];
 #endif
-
+    
     self.sessionManager = [[MQTTSessionManager alloc] init];
-    [self.sessionManager connectTo:@"localhost"
+    [self.sessionManager connectTo:@"broker.hivemq.com"
                               port:1883
                                tls:FALSE
                          keepalive:10
@@ -45,14 +45,45 @@
                     securityPolicy:nil
                       certificates:nil
                      protocolLevel:MQTTProtocolVersion311];
-
+    
+    [self.sessionManager addObserver:self
+                          forKeyPath:@"state"
+                             options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                             context:nil];
+    
     return YES;
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    switch (self.sessionManager.state) {
+        case MQTTSessionManagerStateClosed:
+            NSLog(@"closed");
+            break;
+        case MQTTSessionManagerStateClosing:
+            NSLog(@"closing");
+            break;
+        case MQTTSessionManagerStateConnected:
+            NSLog(@"connected");
+            break;
+        case MQTTSessionManagerStateConnecting:
+            NSLog(@"connecting");
+            break;
+        case MQTTSessionManagerStateError:
+            NSLog(@"error");
+            break;
+        case MQTTSessionManagerStateStarting:
+            NSLog(@"starting");
+            break;
+        default:
+            NSLog(@"unknown");
+            break;
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    NSLog(@"applicationWillResignActive");
 }
 
 
@@ -69,6 +100,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSLog(@"applicationDidBecomeActive");
 }
 
 
@@ -100,7 +132,7 @@
                      * The device is out of space.
                      * The store could not be migrated to the current model version.
                      Check the error message to determine what the actual problem was.
-                    */
+                     */
                     NSLog(@"Unresolved error %@, %@", error, error.userInfo);
                     abort();
                 }

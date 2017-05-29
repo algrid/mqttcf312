@@ -21,26 +21,26 @@ static DDLogLevel ddLogLevel = DDLogLevelVerbose;
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 
-    self.sessionManager = [[MQTTSessionManager alloc] init];
-    self.sessionManager.delegate = self;
-    self.sessionManager.subscriptions = @{@"#": @(MQTTQosLevelAtMostOnce)};
-    [self.sessionManager connectTo:@"localhost"
-                              port:1883
-                               tls:FALSE
-                         keepalive:10
-                             clean:TRUE
-                              auth:FALSE
-                              user:nil
-                              pass:nil
-                              will:FALSE
-                         willTopic:nil
-                           willMsg:nil
-                           willQos:MQTTQosLevelAtMostOnce
-                    willRetainFlag:FALSE
-                      withClientId:@"ViewController"
-                    securityPolicy:nil
-                      certificates:nil
-                     protocolLevel:MQTTProtocolVersion311];
+//    self.sessionManager = [[MQTTSessionManager alloc] init];
+//    self.sessionManager.delegate = self;
+//    self.sessionManager.subscriptions = @{@"#": @(MQTTQosLevelAtMostOnce)};
+//    [self.sessionManager connectTo:@"localhost"
+//                              port:1883
+//                               tls:FALSE
+//                         keepalive:10
+//                             clean:TRUE
+//                              auth:FALSE
+//                              user:nil
+//                              pass:nil
+//                              will:FALSE
+//                         willTopic:nil
+//                           willMsg:nil
+//                           willQos:MQTTQosLevelAtMostOnce
+//                    willRetainFlag:FALSE
+//                      withClientId:@"ViewController"
+//                    securityPolicy:nil
+//                      certificates:nil
+//                     protocolLevel:MQTTProtocolVersion311];
 }
 
 
